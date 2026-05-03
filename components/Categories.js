@@ -9,12 +9,30 @@ export default function Categories({ categories, onSelect }) {
         display: "flex",
         gap: 2,
         flexWrap: "nowrap",
+        fontWeight: 600,
       }}
     >
       {categories.map((cat) => (
-        <Button key={cat} onClick={() => onSelect(cat)} variant="outlined">
+        <Box
+          key={cat}
+          onClick={() => onSelect(cat)}
+          variant="outlined"
+          sx={{
+            px: 3,
+            py: 0.5,
+            bgcolor: "#eee",
+            fontWeight: 600,
+            color: "#fc1522",
+            textAlign: "center",
+            borderRadius: 2,
+            boxShadow: 1.5,
+            cursor: "pointer",
+            border: "1px solid #fc1522",
+            width: "130px",
+          }}
+        >
           {cat}
-        </Button>
+        </Box>
       ))}
     </Box>
   );

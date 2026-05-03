@@ -10,7 +10,9 @@ import {
   CardContent,
   Paper,
   Container,
+  Button,
 } from "@mui/material";
+import Link from "next/link";
 
 export default async function CategoriesPage() {
   const categories = [
@@ -55,6 +57,7 @@ export default async function CategoriesPage() {
       query: "صحة",
       color: "#14b8a6",
       icon: "🏥",
+      url: "/health",
     },
     {
       id: "science",
@@ -116,8 +119,6 @@ export default async function CategoriesPage() {
 
   const data = await Promise.all(categories.map((cat) => getNews(cat.query)));
 
-  console.log(data);
-
   return (
     <Box
       sx={{ p: 3, mt: "150px", "& > *+*": { mt: 5 } }}
@@ -165,7 +166,6 @@ export default async function CategoriesPage() {
               </Box>
 
               <Box
-                href={`/category/${cat.id}`}
                 sx={{
                   color: cat.color,
                   fontSize: 14,
@@ -175,7 +175,7 @@ export default async function CategoriesPage() {
                   transition: "opacity .2s",
                 }}
               >
-                المزيد ←
+                <Link href={`/${cat.id}`}> المزيد ←</Link>
               </Box>
             </Box>
 

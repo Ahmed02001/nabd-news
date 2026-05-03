@@ -9,10 +9,16 @@ import {
   Button,
   Container,
 } from "@mui/material";
+import dayjs from "dayjs";
 import Link from "next/link";
+import relativeTime from "dayjs/plugin/relativeTime";
+import "dayjs/locale/ar";
 
 export default function LatestNewsCard({ article }) {
   const { author, description, publishedAt, title, url, urlToImage } = article;
+
+  dayjs.extend(relativeTime);
+  dayjs.locale("ar");
 
   return (
     <>
@@ -37,6 +43,7 @@ export default function LatestNewsCard({ article }) {
             display: "flex",
             flexDirection: "column",
             alignContent: "space-between",
+            justifyContent: "space-between",
           }}
         >
           <CardContent sx={{ pb: 0, pt: 1 }}>
@@ -60,10 +67,12 @@ export default function LatestNewsCard({ article }) {
               }}
             >
               <Box>{author}</Box>
-              <Box>{new Date(publishedAt).toLocaleDateString("ar-EG")}</Box>
+              <Box>{dayjs(article.publishedAt).fromNow()}</Box>
             </Typography>
           </CardContent>
-          <CardActions sx={{ p: 0, display: "flex", justifyContent: "end" }}>
+          <CardActions
+            sx={{ p: 0, display: "flex", justifyContent: "end", mb: 1, ml: 1 }}
+          >
             <Button size="small">
               <Link href={url}>إقراء المزيد</Link>
             </Button>

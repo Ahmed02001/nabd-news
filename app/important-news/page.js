@@ -1,9 +1,10 @@
 import { Box, Typography } from "@mui/material";
-import NewsCard from "@/components/NewsCard";
 import getNews from "@/lib/categoryAPI";
+import NewsList from "@/components/NewsList";
 
 export default async function page() {
-  const articles = await getNews("مصر");
+  const query = "مصر";
+  const articles = await getNews(query);
 
   return (
     <Box sx={{ marginTop: "150px" }} className="mx-2 md:mx-10 lg:mx-30">
@@ -23,9 +24,7 @@ export default async function page() {
         🔥 الأكثر قراءة
       </Typography>
 
-      {articles?.map((a, i) => (
-        <NewsCard key={i} article={a} />
-      ))}
+      <NewsList initialArticles={articles} query={query} />
     </Box>
   );
 }

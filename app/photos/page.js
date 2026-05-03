@@ -22,8 +22,6 @@ export default function MasonryImageList() {
     getImages(category)
       .then((res) => setImages(res))
       .catch((err) => console.error("Failed to fetch images:", err));
-
-    console.log(category);
   }, [category]);
 
   const categories = new Map([
@@ -53,11 +51,7 @@ export default function MasonryImageList() {
       sx={{
         m: 0,
         mt: "125px",
-        px: {
-          sm: 1,
-          md: 5,
-          lg: 15,
-        },
+        margin: "auto",
       }}
     >
       <Box
@@ -85,7 +79,6 @@ export default function MasonryImageList() {
             <Box
               key={key}
               onClick={() => {
-                console.log(categories.get(key));
                 setCategory(categories.get(key));
               }}
               sx={{

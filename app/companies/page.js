@@ -33,14 +33,21 @@ export default function Page() {
   ];
 
   const [articles, setArticles] = useState([]);
+  const [companies, setcompanies] = useState([]);
   const [query, setQuery] = useState("شركات");
   useEffect(() => {
-    getNews(query).then((res) => setArticles(res));
+    getNews(query).then((res) => {
+      if (query == "شركات") {
+        setcompanies(res);
+        setArticles(res);
+      } else {
+        setArticles(res);
+      }
+    });
   }, [query]);
 
   return (
     <Container
-      disableGutters
       sx={{
         display: "grid",
         gridTemplateColumns: "repeat(3, 1fr)",
@@ -48,18 +55,20 @@ export default function Page() {
         mt: 20,
       }}
     >
-      <Container className="col-span-3  lg:col-span-2 mx-2 md:mx-10 lg:mx-30">
+      <Container
+        disableGutters
+        className="col-span-3  lg:col-span-2 mx-2 md:mx-10 lg:mx-30"
+      >
         {articles[0] && <Hero article={articles[0]} />}
 
         <Box
           sx={{
             width: "100%",
-            py: 2,
+            py: 1,
             position: "sticky",
-            top: "125px",
+            top: "135px",
             left: " 50%",
             zIndex: 50,
-            bgcolor: "#eee",
           }}
         >
           <Stack
@@ -67,6 +76,7 @@ export default function Page() {
             spacing={1}
             sx={{
               width: "100%",
+              px: 2,
               overflowX: "scroll",
               scrollbarWidth: "none",
               overflowStyle: "none",
@@ -112,7 +122,7 @@ export default function Page() {
           p: 2,
           boxShadow: "0px 0px 3px #E63946",
           borderRadius: "10px",
-          height: "1000px",
+          height: "fit-content",
         }}
       >
         <Typography
@@ -134,7 +144,7 @@ export default function Page() {
           أحدث الأخبار
         </Typography>
         <Box sx={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-          {articles.slice(1, 7).map((article, i) => (
+          {companies.slice(1, 7).map((article, i) => (
             <Grid key={i}>
               <LatestNewsCard article={article} />
             </Grid>

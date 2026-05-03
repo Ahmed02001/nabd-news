@@ -33,30 +33,20 @@ export default function Navbar({ mode, setMode }) {
     setMode(mode === "light" ? "dark" : "light");
   };
 
-  const open = Boolean(anchorEl);
-
-  const handleMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-  };
-
   const links = [
     { name: "الرئيسية", href: "/" },
     { name: "أحدث الأخبار", href: "/important-news" },
+    { name: "العالم", href: "/world" },
+    { name: "اقتصاد", href: "/economy" },
+    { name: "الشرق الأوسط", href: "/middle-east" },
     { name: "الاقسام", href: "/categories" },
     { name: "شركات", href: "/companies" },
     { name: "صور", href: "/photos" },
-    {
-      name: "تكنولوجيا",
-      children: [
-        { name: "ذكاء اصطناعي", href: "/tech/ai" },
-        { name: "ويب", href: "/tech/web" },
-        { name: "موبايل", href: "/tech/mobile" },
-      ],
-    },
+    { name: "تكنولوجيا", href: "/technology" },
+    { name: "ثقافة", href: "/culture" },
+    { name: "التعليم", href: "/education" },
+    { name: "الصحة", href: "/health" },
+    { name: "البيئة", href: "/environment" },
   ];
 
   return (
@@ -65,7 +55,7 @@ export default function Navbar({ mode, setMode }) {
         className={cairo.className}
         elevation={2}
         sx={{
-          pl: { xs: 4, md: 6, lg: 10 },
+          pl: { xs: 4, md: 6 },
           bgcolor: "background.paper",
           color: "text.primary",
           borderBottom: "1px solid",
@@ -94,80 +84,39 @@ export default function Navbar({ mode, setMode }) {
             </Link>
           </Typography>
 
-          <Box sx={{ display: { xs: "none", md: "flex" }, gap: 2 }}>
-            {links.map((link) =>
-              link.children ? (
-                <div key={link.name}>
-                  <Button
-                    color="text.primary"
-                    onClick={handleMenuOpen}
-                    sx={{
-                      "&:hover": {
-                        color: "primary.main",
-                      },
-                      fontWeight: "700",
-                    }}
-                  >
-                    {link.name}
-                  </Button>
-
-                  <Menu
-                    anchorEl={anchorEl}
-                    open={open}
-                    onClose={handleMenuClose}
-                  >
-                    {link.children.map((child) => (
-                      <MenuItem key={child.name} onClick={handleMenuClose}>
-                        <Link
-                          href={child.href}
-                          style={{
-                            textDecoration: "none",
-                            color: "text.primary",
-                            "&:hover": {
-                              color: "primary.main",
-                            },
-                            fontWeight: "700",
-                          }}
-                        >
-                          {child.name}
-                        </Link>
-                      </MenuItem>
-                    ))}
-                  </Menu>
-                </div>
-              ) : (
-                <Button
-                  key={link.name}
-                  color="text.primary"
-                  sx={{
+          <Box sx={{ display: { md: "none", lg: "flex" } }}>
+            {links.map((link) => (
+              <Button
+                key={link.name}
+                color="text.primary"
+                sx={{
+                  color: "text.primary",
+                  fontWeight: "700",
+                  textDecoration: "none",
+                  "&:hover": {
+                    color: "primary.main",
+                  },
+                }}
+              >
+                <Link
+                  href={link.href}
+                  style={{
+                    textDecoration: "none",
                     color: "text.primary",
                     fontWeight: "700",
-                    textDecoration: "none",
-                    "&:hover": {
-                      color: "primary.main",
-                    },
                   }}
                 >
-                  <Link
-                    href={link.href}
-                    style={{
-                      textDecoration: "none",
-                      color: "text.primary",
-                      fontWeight: "700",
-                    }}
-                  >
-                    {link.name}
-                  </Link>
-                </Button>
-              ),
-            )}
+                  {link.name}
+                </Link>
+              </Button>
+            ))}
           </Box>
 
           <IconButton
             color="text.primary"
             edge="start"
             onClick={() => setMobileOpen(true)}
-            sx={{ display: { md: "none" } }}
+            sx={{ display: { lg: "none" } }}
           >
             <MenuIcon />
           </IconButton>
@@ -179,58 +128,23 @@ export default function Navbar({ mode, setMode }) {
         open={mobileOpen}
         onClose={() => setMobileOpen(false)}
       >
-        <Box sx={{ width: 250, p: 2, direction: "rtl" }}>
-          {links.map((link) =>
-            link.children ? (
-              <Box key={link.name} mb={2}>
-                <Typography
-                  sx={{
-                    textDecoration: "none",
-                    fontWeight: "700",
-                    color: "text.primary",
-                    "&:hover": {
-                      color: "primary.main",
-                    },
-                  }}
-                >
-                  {link.name}
-                </Typography>
-                <Box sx={{ pl: 2 }}>
-                  {link.children.map((child) => (
-                    <Typography
-                      key={child.name}
-                      sx={{
-                        mt: 1,
-                        textDecoration: "none",
-                        fontWeight: "700",
-                        color: "text.primary",
-                        "&:hover": {
-                          color: "primary.main",
-                        },
-                      }}
-                    >
-                      <Link href={child.href}>{child.name}</Link>
-                    </Typography>
-                  ))}
-                </Box>
-              </Box>
-            ) : (
-              <Typography
-                key={link.name}
-                sx={{
-                  mb: 2,
-                  textDecoration: "none",
-                  color: "text.primary",
-                  fontWeight: "700",
-                  "&:hover": {
-                    color: "primary.main",
-                  },
-                }}
-              >
-                <Link href={link.href}>{link.name}</Link>
-              </Typography>
-            ),
-          )}
+        <Box sx={{ width: 250, p: 2, direction: "ltr" }}>
+          {links.map((link) => (
+            <Typography
+              key={link.name}
+              sx={{
+                mb: 2,
+                textDecoration: "none",
+                color: "text.primary",
+                fontWeight: "700",
+                "&:hover": {
+                  color: "primary.main",
+                },
+              }}
+            >
+              <Link href={link.href}>{link.name}</Link>
+            </Typography>
+          ))}
         </Box>
       </Drawer>
     </>

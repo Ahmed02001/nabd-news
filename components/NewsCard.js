@@ -6,8 +6,14 @@ import {
   Stack,
   Button,
 } from "@mui/material";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import "dayjs/locale/ar";
 
 export default function NewsCard({ article }) {
+  dayjs.extend(relativeTime);
+  dayjs.locale("ar");
+
   return (
     <Card sx={{ borderRadius: 3, mt: 2 }}>
       <CardMedia
@@ -42,7 +48,7 @@ export default function NewsCard({ article }) {
             color="text.secondary"
             sx={{ fontWeight: 600 }}
           >
-            {new Date(article.publishedAt).toLocaleString("ar-EG")}
+            {dayjs(article.publishedAt).fromNow()}
           </Typography>
         </Stack>
         <Typography

@@ -10,7 +10,7 @@ import getNews from "@/lib/categoryAPI";
 export default async function Home() {
   const companyNews = await getNews("شركات");
 
-  const articles = await getNews("مصر");
+  const articles = await getNews("أخبار");
 
   const categories = ["مصر", "تكنولوجيا", "رياضة", "اقتصاد"];
 
@@ -20,9 +20,7 @@ export default async function Home() {
         px: "25px",
         display: "grid",
         gridTemplateColumns: "repeat(3, 1fr)",
-        flexDirection: { xs: "column", lg: "row" },
-        justifyContent: "center",
-        alignItems: "center",
+        flexDirection: { xs: "column", md: "row" },
         gap: 2,
         mt: 20,
       }}
@@ -56,7 +54,7 @@ export default async function Home() {
         </Typography>
 
         <Grid container spacing={3}>
-          {articles.slice(1, 7).map((article, i) => (
+          {articles.map((article, i) => (
             <Grid xs={12} sm={6} md={4} key={i} sx={{ width: "100%" }}>
               <NewsCard article={article} />
             </Grid>
@@ -70,7 +68,7 @@ export default async function Home() {
         className="col-span-3  xl:col-span-1"
         sx={{
           display: "flex",
-          flexDirection: { xs: "column", md: "row", lg: "column" },
+          flexDirection: { xs: "column" },
           gap: 4,
         }}
       >
