@@ -18,6 +18,7 @@ import Trending from "@/components/Trending";
 import Grid from "@mui/material/Grid";
 import LatestNewsCard from "@/components/LatestNewsCard";
 import getNews from "@/lib/categoryAPI";
+import NewsList from "@/components/NewsList";
 
 export default function Page() {
   const categories = [
@@ -106,11 +107,12 @@ export default function Page() {
         </Typography>
 
         <Grid container spacing={3}>
-          {articles.slice(1, 7).map((article, i) => (
+          <NewsList initialArticles={articles} query={query} />
+          {/* {articles.slice(1, 7).map((article, i) => (
             <Grid xs={12} sm={6} md={4} key={i}>
               <NewsCard article={article} />
             </Grid>
-          ))}
+          ))} */}
         </Grid>
 
         <Trending />

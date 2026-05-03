@@ -1,23 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import {
-  Container,
-  Box,
-  Typography,
-  Divider,
-  Card,
-  CardMedia,
-  CardContent,
-  Stack,
-} from "@mui/material";
+import { Container, Box, Typography, Stack } from "@mui/material";
 import Hero from "@/components/Hero";
 import Categories from "@/components/Categories";
-import NewsCard from "@/components/NewsCard";
 import Trending from "@/components/Trending";
 import Grid from "@mui/material/Grid";
 import LatestNewsCard from "@/components/LatestNewsCard";
 import getNews from "@/lib/categoryAPI";
+import NewsList from "@/components/NewsList";
 
 export default function Page() {
   const techCategories = [
@@ -109,11 +100,12 @@ export default function Page() {
         </Typography>
 
         <Grid container spacing={3}>
-          {articles.slice(1, 7).map((article, i) => (
+          <NewsList initialArticles={articles} query={query} />
+          {/* {articles.slice(1, 7).map((article, i) => (
             <Grid xs={12} sm={6} md={4} key={i}>
               <NewsCard article={article} />
             </Grid>
-          ))}
+          ))} */}
         </Grid>
 
         <Trending />

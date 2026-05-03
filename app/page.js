@@ -6,11 +6,13 @@ import Trending from "@/components/Trending";
 import Grid from "@mui/material/Grid";
 import LatestNewsCard from "@/components/LatestNewsCard";
 import getNews from "@/lib/categoryAPI";
+import NewsList from "@/components/NewsList";
 
 export default async function Home() {
+  const query = "أخبار";
   const companyNews = await getNews("شركات");
 
-  const articles = await getNews("أخبار");
+  const articles = await getNews(query);
 
   const categories = ["مصر", "تكنولوجيا", "رياضة", "اقتصاد"];
 
@@ -54,11 +56,12 @@ export default async function Home() {
         </Typography>
 
         <Grid container spacing={3}>
-          {articles.map((article, i) => (
+          <NewsList initialArticles={articles} query={query} />
+          {/* {articles.map((article, i) => (
             <Grid xs={12} sm={6} md={4} key={i} sx={{ width: "100%" }}>
               <NewsCard article={article} />
             </Grid>
-          ))}
+          ))} */}
         </Grid>
 
         <Trending />
