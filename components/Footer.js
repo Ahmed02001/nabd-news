@@ -36,8 +36,7 @@ export default function Footer() {
     >
       <Container maxWidth="lg">
         <Grid container spacing={6}>
-          {/* 🔥 LOGO + ABOUT */}
-          <Grid item xs={12} md={4}>
+          <Grid xs={12} md={4}>
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -80,7 +79,7 @@ export default function Footer() {
             </motion.div>
           </Grid>
 
-          <Grid item xs={6} md={2}>
+          <Grid xs={6} md={2}>
             <Typography fontWeight={700} mb={2}>
               روابط
             </Typography>
@@ -107,7 +106,7 @@ export default function Footer() {
             ))}
           </Grid>
 
-          <Grid item xs={12} md={2}>
+          <Grid xs={12} md={2}>
             <Typography fontWeight={700} mb={2}>
               🔥 الأكثر تداولًا
             </Typography>
@@ -135,7 +134,7 @@ export default function Footer() {
             ))}
           </Grid>
 
-          <Grid item xs={12} md={3}>
+          <Grid xs={12} md={3}>
             <Typography fontWeight={700} mb={2}>
               اشترك الآن
             </Typography>
